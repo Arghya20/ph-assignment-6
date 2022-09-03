@@ -54,7 +54,7 @@ const newsBox = async (data) => {
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title text-dark fw-semibold">${element.title}</h5>
-        <p class="card-text ellipsis text-secondary">${element.details} </p>
+        <p class="card-text ellipsis text-black-50">${element.details} </p>
 
         <div class="bg-light rounded d-flex justify-content-between">
           <!-- Author Box start -->
@@ -133,8 +133,9 @@ const modalData = (getData) => {
     `;
     modalBody.innerHTML = `
     <img src='${element.thumbnail_url}' />
-    <h4>Total Views: ${element.total_view}M</h4>
-    <p><strong>Details:</strong> ${element.details} </p>
+    <h4 class="my-3">Total Views: ${element.total_view ? element.total_view : "0"}M</h4>
+    <p>Rating: ${element.rating.number}</p>
+    <p class="text-black-50"><strong class="text-dark">Details:</strong> ${element.details} </p>
     `;
   });
 };
