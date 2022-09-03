@@ -21,6 +21,7 @@ const displayCategory = (data) => {
 
 // Category Link api and function call here ====
 const newsCategory = async (id) => {
+  toggleSpinner(true);
   const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -30,7 +31,7 @@ const newsCategory = async (id) => {
 const newsBox = async (data) => {
   const mainContainer = document.getElementById("main-container");
   mainContainer.textContent = "";
-  
+
   data.forEach((element) => {
     const div = document.createElement("div");
     div.innerHTML = `
@@ -86,6 +87,16 @@ const newsBox = async (data) => {
     `;
     mainContainer.appendChild(div);
   });
+  toggleSpinner(false);
+};
+
+const toggleSpinner = (isLoading) => {
+  const spinner = document.getElementById("spanner");
+  if (isLoading) {
+    spinner.classList.remove("d-none");
+  } else {
+    spinner.classList.add("d-none");
+  }
 };
 
 loadCategory();
