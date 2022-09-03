@@ -6,11 +6,9 @@ const loadCategory = async () => {
   const res = await url.json();
   displayCategory(res.data.news_category);
 };
-
 // Load Categroy Function Start Here========
 const displayCategory = (data) => {
   const categoryContiner = document.getElementById("category-container");
-
   data.forEach((element) => {
     const nav = document.createElement("nav");
     nav.innerHTML = `
@@ -30,9 +28,10 @@ const newsCategory = async (id) => {
 };
 // Category news function start Here =======
 const newsBox = async (data) => {
+  const mainContainer = document.getElementById("main-container");
+  mainContainer.textContent = "";
+  
   data.forEach((element) => {
-    const mainContainer = document.getElementById("main-container");
-
     const div = document.createElement("div");
     div.innerHTML = `
     <div class="card mb-3 shadow-sm w100"">
