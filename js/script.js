@@ -9,6 +9,7 @@ const loadCategory = async () => {
 // Load Categroy Function Start Here========
 const displayCategory = (data) => {
   const categoryContiner = document.getElementById("category-container");
+
   data.forEach((element) => {
     const nav = document.createElement("nav");
     nav.innerHTML = `
@@ -31,6 +32,10 @@ const newsCategory = async (id) => {
 const newsBox = async (data) => {
   const mainContainer = document.getElementById("main-container");
   mainContainer.textContent = "";
+
+  //items =====
+  const items = document.getElementById("items");
+  items.innerText = `${data.length} News Found `;
 
   data.forEach((element) => {
     const div = document.createElement("div");
@@ -61,8 +66,14 @@ const newsBox = async (data) => {
               />
             </div>
             <div class="d-flex align-items-cente flex-column">
-              <span>${element.author.name}</span>
-              <span>${element.author.published_date}</span>
+              <span>${
+                element.author.name ? element.author.name : "No Data Found"
+              }</span>
+              <span>${
+                element.author.published_date
+                  ? element.author.published_date
+                  : "No Data Found"
+              }</span>
             </div>
           </div>
           <!-- Author Box end -->
@@ -70,7 +81,9 @@ const newsBox = async (data) => {
           <!-- Views Box start -->
           <div class="d-flex align-items-center">
             <span><i class="fa-regular fa-eye mx-2"></i></span>
-            <span>${element.total_view}<strong>M</strong></span>
+            <span>${
+              element.total_view ? element.total_view : "0"
+            }<strong>M</strong></span>
           </div>
           <!-- Views Box end -->
 
