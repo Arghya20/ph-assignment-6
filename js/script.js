@@ -28,7 +28,7 @@ const newsCategory = async (id) => {
   const data = await res.json();
   newsBox(data.data);
 };
-// Category news function start Here =======
+// Category news function start Here (box) =======
 const newsBox = async (data) => {
   const mainContainer = document.getElementById("main-container");
   mainContainer.textContent = "";
@@ -40,7 +40,9 @@ const newsBox = async (data) => {
   data.forEach((element) => {
     const div = document.createElement("div");
     div.innerHTML = `
-    <div class="card mb-3 shadow-sm w100"">
+    <div class="card mb-3 shadow-sm w100"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getId('${
+      element._id
+    }')">
     <div class="row g-0">
     <div class="col-md-4 p-1">
       <img
@@ -103,6 +105,7 @@ const newsBox = async (data) => {
   toggleSpinner(false);
 };
 
+//Spinner Function ==========
 const toggleSpinner = (isLoading) => {
   const spinner = document.getElementById("spanner");
   if (isLoading) {
@@ -110,6 +113,30 @@ const toggleSpinner = (isLoading) => {
   } else {
     spinner.classList.add("d-none");
   }
+};
+
+// Modal Section ======
+
+const getId = async (getNews) => {
+  const url = `https://openapi.programming-hero.com/api/news/${getNews}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  modalData(data.data);
+};
+
+const modalData = (getData) => {
+  const modalTitle = document.getElementById("exampleModalLabel");
+  const modalBody = document.getElementById("modal-body");
+  getData.forEach((element) => {
+    modalTitle.innerHTML = `
+    <h5>${element.title}</h5>
+    `;
+    modalBody.innerHTML = `
+    <img src='${element.thumbnail_url}' />
+    <h4>Total Views: ${element.total_view}M</h4>
+    <p><strong>Details:</strong> ${element.details} </p>
+    `;
+  });
 };
 
 loadCategory();
