@@ -1,10 +1,15 @@
 // Load Categroy Function Call with api  =============
 const loadCategory = async () => {
-  const url = await fetch(
-    "https://openapi.programming-hero.com/api/news/categories"
-  );
-  const res = await url.json();
-  displayCategory(res.data.news_category);
+  try {
+    const url = await fetch(
+      "https://openapi.programming-hero.com/api/news/categories"
+    );
+    const res = await url.json();
+    displayCategory(res.data.news_category);
+  } 
+  catch (error) {
+    alert("error");
+  }
 };
 // Load Categroy Function Start Here========
 const displayCategory = (data) => {
@@ -36,6 +41,8 @@ const newsBox = async (data) => {
   //items =====
   const items = document.getElementById("items");
   items.innerText = `${data.length} News Found `;
+  // Views sort ==========
+  data.sort((a, b) => b.total_view - a.total_view);
 
   data.forEach((element) => {
     const div = document.createElement("div");
@@ -133,9 +140,13 @@ const modalData = (getData) => {
     `;
     modalBody.innerHTML = `
     <img src='${element.thumbnail_url}' />
-    <h4 class="my-3">Total Views: ${element.total_view ? element.total_view : "0"}M</h4>
+    <h4 class="my-3">Total Views: ${
+      element.total_view ? element.total_view : "0"
+    }M</h4>
     <p>Rating: ${element.rating.number}</p>
-    <p class="text-black-50"><strong class="text-dark">Details:</strong> ${element.details} </p>
+    <p class="text-black-50"><strong class="text-dark">Details:</strong> ${
+      element.details
+    } </p>
     `;
   });
 };
