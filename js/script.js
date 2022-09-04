@@ -6,8 +6,7 @@ const loadCategory = async () => {
     );
     const res = await url.json();
     displayCategory(res.data.news_category);
-  } 
-  catch (error) {
+  } catch (error) {
     alert(error.message);
   }
 };
@@ -28,10 +27,14 @@ const displayCategory = (data) => {
 // Category Link api and function call here ====
 const newsCategory = async (id) => {
   toggleSpinner(true);
-  const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  newsBox(data.data);
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    newsBox(data.data);
+  } catch (error) {
+    alert(error.message);
+  }
 };
 // Category news function start Here (box) =======
 const newsBox = async (data) => {
@@ -125,10 +128,14 @@ const toggleSpinner = (isLoading) => {
 // Modal Section ======
 
 const getId = async (getNews) => {
-  const url = `https://openapi.programming-hero.com/api/news/${getNews}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  modalData(data.data);
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/${getNews}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    modalData(data.data);
+  } catch (error) {
+    alert(error.message);
+  }
 };
 
 const modalData = (getData) => {
