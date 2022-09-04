@@ -8,7 +8,7 @@ const loadCategory = async () => {
     displayCategory(res.data.news_category);
   } 
   catch (error) {
-    alert("error");
+    alert(error.message);
   }
 };
 // Load Categroy Function Start Here========
